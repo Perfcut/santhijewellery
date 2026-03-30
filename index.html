@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santhi Jewellery | Excellence Since 1979</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --maroon: #5B1611;
+            --cream: #F8F5F0;
+            --white: #FFFFFF;
+            --transition: all 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; background: var(--white); overflow-x: hidden; color: #222; }
+        h1, h2, h3 { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 3px; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--white);
+            transition: var(--transition);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .section {
+    scroll-margin-top: 90px;
+}
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 85px;
+            padding: 0 5%;
+            position: relative;
+        }
+         
+        .menu-trigger {
+            position: absolute;
+            left: 5%;
+            font-size: 26px;
+            color: var(--maroon);
+            cursor: pointer;
+        }
+
+        .brand-group { display: flex; align-items: center; gap: 15px; }
+        .brand-group img.logo { height: 55px; width: auto; }
+        .brand-group img.font-logo { height: 30px; width: auto; }
+
+        .nav-line { width: 100%; height: 1px; background: var(--gold); opacity: 0.5; }
+
+        /* Bridal Mode Nav */
+        nav.bridal-active { background: var(--maroon); }
+        nav.bridal-active .menu-trigger { color: var(--gold); }
+        nav.bridal-active .brand-group img { filter: brightness(0) invert(1); }
+
+        /* --- SIDE MENU --- */
+        .menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 1999; display: none; backdrop-filter: blur(2px);
+        }
+        .side-menu {
+            position: fixed; top: 0; left: -320px; width: 320px; height: 100vh;
+            background: var(--white); z-index: 2000; transition: var(--transition);
+            padding: 40px 30px; box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+        }
+        .side-menu.open { left: 0; }
+        .side-menu .close-btn { text-align: right; font-size: 30px; color: var(--maroon); cursor: pointer; }
+        .side-menu ul { list-style: none; margin-top: 30px; }
+        .side-menu ul li { margin-bottom: 20px; border-bottom: 1px solid #f5f5f5; padding-bottom: 10px; }
+        .side-menu ul li a { 
+            text-decoration: none; color: var(--maroon); font-family: 'Cinzel', serif; 
+            font-size: 16px; transition: 0.3s; display: block;
+        }
+        .side-menu ul li a:hover { color: var(--gold); padding-left: 10px; }
+
+        /* --- HERO SLIDER --- */
+        .hero-slider::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.05);
+}
+        .hero { margin-top: 85px; padding: 15px; }
+        .hero-slider {
+            width: 100%; height: 70vh; border-radius: 30px;
+            border: 1px solid var(--maroon); overflow: hidden; position: relative;
+        }
+        .slide {
+            position: absolute; width: 100%; height: 100%; opacity: 0;
+            transition: opacity 1s ease-in-out; background-size: cover; background-position: center;
+        }
+        .slide.active { opacity: 1; }
+
+        /* --- CRAFTED WORKS --- */
+        .horizontal-container {
+            display: flex; overflow-x: auto; gap: 20px; padding: 40px 5%;
+            scrollbar-width: none;
+        }
+        .horizontal-container::-webkit-scrollbar { display: none; }
+        .work-card {
+            min-width: 280px; height: 380px; border-radius: 20px;
+            overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .work-card img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- CUSTOMIZATION --- */
+        .custom-highlight { padding: 80px 5%; background: var(--cream); }
+        .custom-inner {
+            max-width: 900px; margin: 0 auto; border: 1px solid var(--gold);
+            padding: 60px 40px; text-align: center; background: var(--white);
+        }
+        .gold-btn {
+            display: inline-block; background: linear-gradient(135deg, #D4AF37, #B8860B);
+            color: white; padding: 16px 40px; border-radius: 50px;
+            text-decoration: none; font-weight: 600; margin-top: 20px; transition: 0.3s;
+        }
+        .gold-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(184,134,11,0.3); }
+
+        /* --- CATEGORY HYBRID SYSTEM --- */
+        .desktop-only { display: block; }
+        .mobile-only { display: none; }
+.mobile-card {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.mobile-card img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.mobile-text {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    max-width: 60%;
+    background: rgba(255,255,255,0.85);
+    padding: 15px;
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+}
+
+.mobile-text h2 {
+    font-size: 20px;
+    color: var(--maroon);
+}
+        /* Desktop Style */
+        .cinematic-block {
+            position: relative; height: 100vh; overflow: hidden; display: flex; align-items: center;
+        }
+        .parallax-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 130%;
+            background-size: cover; background-position: right center; z-index: 1; will-change: transform;
+        }
+        .cinematic-block::before {
+            content: ""; position: absolute; left: 0; top: 0; width: 50%; height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0.95), transparent); z-index: 2;
+        }
+        .cinematic-text {
+            position: relative; z-index: 3; margin-left: 8%; max-width: 450px;
+            opacity: 0; transform: translateY(40px); transition: 1s ease;
+        }
+        .cinematic-block.active .cinematic-text { opacity: 1; transform: translateY(0); }
+        .cinematic-text h2 { font-size: 50px; color: var(--maroon); margin: 15px 0; }
+
+        /* Mobile Style */
+        .story-block { padding: 60px 5%; background: var(--white); }
+        .story-wrapper { display: flex; flex-direction: column; gap: 20px; }
+        .story-content { 
+            padding: 30px; border-left: 4px solid var(--gold); 
+            background: var(--cream); order: 1; 
+        }
+        .story-img { order: 2; }
+        .story-img img { width: 100%; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        /* --- BRIDAL SECTION --- */
+        #bridal { background: #1a0503; color: var(--white); padding: 100px 5%; text-align: center; }
+        .framed-container {
+            display: inline-block; padding: 15px; border: 1px solid var(--gold);
+            margin-top: 30px; transition: 0.3s;
+        }
+        .framed-container:hover { border-color: var(--white); }
+
+        /* --- WHY CHOOSE US --- */
+        .trust-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px; padding: 80px 10%; text-align: center;
+        }
+        .trust-item i { font-size: 45px; color: var(--gold); margin-bottom: 15px; display: block; }
+        .trust-item img { height: 55px; margin-bottom: 15px; }
+
+        /* --- VIDEO & TEAM --- */
+        .video-box { max-width: 950px; margin: 0 auto 80px; border: 1px solid var(--gold); padding: 10px; border-radius: 20px; }
+        .video-box iframe { border-radius: 15px; display: block; }
+
+        /* --- FOOTER & FLOATING --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25D366;
+            width: 65px; height: 65px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: white;
+            font-size: 35px; z-index: 999; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .offer-modal {
+            position: fixed; bottom: 110px; right: 30px; width: 310px;
+            background: white; padding: 25px; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2); display: none; z-index: 1000;
+        }
+        footer { padding: 40px 20px; background: var(--cream); }
+        .footer-card {
+            background: var(--maroon); color: var(--white); border-radius: 40px;
+            padding: 60px 40px; max-width: 1200px; margin: 0 auto; text-align: center;
+        }
+           .social-links a { color: var(--gold); margin: 0 10px; font-size: 24px; }
+
+        /* --- RESPONSIVE OVERRIDES --- */
+        @media (max-width:768px){
+    h2 { font-size: 24px; }
+    p { font-size: 14px; }
+    .custom-inner { padding: 40px 20px; }
+}
+        @media (max-width: 768px) {
+            .desktop-only { display: none; }
+            .mobile-only { display: block; }
+            .hero-slider { height: 50vh; }
+            .brand-group img.logo { height: 45px; }
+            .brand-group img.font-logo { height: 25px; }
+            .video-box iframe { height: 280px; }
+        }
+    
+    </style>
+</head>
+<body>
+
+    <div id="overlay" class="menu-overlay" onclick="toggleMenu()"></div>
+
+    <div id="sideNav" class="side-menu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+      <ul>
+    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+    <li><a href="#works" onclick="toggleMenu()">Crafted Works</a></li>
+    <li><a href="#custom" onclick="toggleMenu()">Custom Jewellery</a></li>
+    <li><a href="#category" onclick="toggleMenu()">Collections</a></li>
+    <li><a href="#bridal" onclick="toggleMenu()">Bridal Collection</a></li>
+    <li><a href="#why" onclick="toggleMenu()">Why Choose Us</a></li>
+    <li><a href="#video" onclick="toggleMenu()">Videos</a></li>
+    <li><a href="#team" onclick="toggleMenu()">Our Team</a></li>
+    <li><a href="#feedback" onclick="toggleMenu()">Feedback</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><a href="https://maps.app.goo.gl/Mo7s22XjkrNKdFuV8" target="_blank">Visit Store</a></li>
+</ul>
+    </div>
+
+    <nav id="mainNav">
+        <div class="nav-container">
+            <div class="menu-trigger" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></div>
+            <div class="brand-group">
+                <img src="logo-santhijewellery.png" alt="Santhi Logo" class="logo">
+                <img src="font-santhijewellery.png" alt="Santhi Name" class="font-logo">
+            </div>
+        </div>
+        <div class="nav-line"></div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-slider" id="slider">
+            <div class="slide active"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+    </section>
+
+    <section id="works">
+        <h2 style="text-align: center; margin-top: 60px;">Crafted Works</h2>
+        <div class="horizontal-container">
+            <div class="work-card"><img src="ourworks1.png"></div>
+            <div class="work-card"><img src="ourworks2.png"></div>
+            <div class="work-card"><img src="ourworks3.png"></div>
+            <div class="work-card"><img src="ourworks4.png"></div>
+            <div class="work-card"><img src="ourworks5.png"></div>
+        </div>
+    </section>
+
+    <section id="category">
+        
+        <div class="desktop-only">
+            <div class="cinematic-block">
+                <div class="parallax-img" style="background-image: url('gold.png');"></div>
+                <div class="cinematic-text">
+                    <span>Collection</span>
+                    <h2>Gold</h2>
+                    <p>Pure gold. Timeless tradition. Crafted with heritage and elegance, designed to shine for generations.</p>
+                </div>
+            </div>
+            <div class="cinematic-block">
+                <div class="parallax-img" style="background-image: url('diamond.png');"></div>
+                <div class="cinematic-text">
+                    <span>Collection</span>
+                    <h2>Diamond</h2>
+                    <p>Brilliance that speaks. A perfect reflection of light, luxury, and timeless beauty.</p>
+                </div>
+            </div>
+            <div class="cinematic-block">
+                <div class="parallax-img" style="background-image: url('silver.png');"></div>
+                <div class="cinematic-text">
+                    <span>Collection</span>
+                    <h2>Silver</h2>
+                    <p>Grace in every detail. Refined creations that blend tradition with modern simplicity.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-only">
+
+    <div class="mobile-card">
+        <img src="gold.png">
+        <div class="mobile-text">
+            <h2>Gold</h2>
+            <p>Timeless brilliance crafted for generations.</p>
+        </div>
+    </div>
+
+    <div class="mobile-card">
+        <img src="diamond.png">
+        <div class="mobile-text">
+            <h2>Diamond</h2>
+            <p>Pure sparkle that defines luxury.</p>
+        </div>
+    </div>
+
+    <div class="mobile-card">
+        <img src="silver.png">
+        <div class="mobile-text">
+            <h2>Silver</h2>
+            <p>Minimal elegance with modern charm.</p>
+        </div>
+    </div>
+
+</div>
+    </section>
+
+    <section id="custom" class="custom-highlight">
+        <div class="custom-inner">
+            <h3>Custom Jewellery</h3>
+            <p style="margin: 20px 0; font-style: italic; color: #666;">"Designed your way, crafted our way. Bring your vision to life."</p>
+            <a href="https://wa.me/919500500546?text=I%20want%20to%20customize%20jewellery" class="gold-btn">Contact Designer</a>
+        </div>
+    </section>
+
+    <section id="bridal">
+        <h2>Bridal Collection</h2>
+        <div style="max-width: 1000px; margin: 40px auto; border: 1px solid var(--gold); padding: 10px;">
+            <img src="banner-desktop3.png" style="width: 100%;">
+        </div>
+        <p>Crafting memories that last a lifetime.</p>
+        <div class="framed-container">
+            <a href="https://maps.google.com" class="gold-btn" style="margin:0;">Visit Store</a>
+        </div>
+    </section>
+
+    <section id="why" class="trust-grid">
+        <div class="trust-item"><img src="bis.png"><h4>Pure Gold Guarantee</h4></div>
+        <div class="trust-item"><i class="fa-solid fa-certificate"></i><h4>Certified Jewellery</h4></div>
+        <div class="trust-item"><i class="fa-solid fa-hourglass-start"></i><h4>Legacy Since 1979</h4></div>
+        <div class="trust-item"><i class="fa-brands fa-whatsapp"></i><h4>Easy Ordering</h4></div>
+    </section>
+
+    <section id="video" style="padding: 40px 5%; font-family: sans-serif;">
+    <h3 style="text-align: center; color: #5B1611; margin-bottom: 20px;">We're on YouTube Shorts</h3> 
+    
+    <div class="video-box" style="max-width: 315px; margin: 0 auto;">
+        <div style="position: relative; width: 100%; aspect-ratio: 9 / 16;">
+            <iframe 
+                src="https://www.youtube.com/embed/7rfNelnrOh0" 
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px;" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+</section>
+
+
+    <section id="team" style="text-align: center; padding: 100px 5%; background: var(--cream);">
+        <h2>Our Artisans</h2>
+        <div style="max-width: 320px; margin: 40px auto;">
+            <img src="staffs.png" style="width: 100%; border-radius: 50%; border: 3px solid var(--gold); padding: 8px; background: white;">
+        </div>
+        <p id="feedback">"Dedicated hands behind every masterpiece. Crafting trust, one design at a time."</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKeGjG-K_8njB_cvO6fDLl1mA1Me_G0rRxpE4UhdPy0_1D4w/viewform"
+class="gold-btn">Share Feedback</a>
+    </section>
+<section id="contact" style="text-align:center; padding:60px 5%; font-family: sans-serif;">
+    <h2 style="color: #5B1611;">Contact Us</h2>
+    
+    <p style="margin-top:15px;">
+        <strong>Phone:</strong> 
+        <a href="tel:+919500500546" style="text-decoration:none; color:inherit;">+91 9500500546</a>
+    </p>
+    
+    <p style="margin-top:10px;">
+        <strong>Email:</strong> 
+        <a href="mailto:santhijewellery1979@gmail.com" style="color: #5B1611; text-decoration: none;">santhijewellery1979@gmail.com</a>
+    </p>
+</section>
+<hr style="border: 0; height: 1px; background: #D4AF37; width: 50%; margin: 30px auto; opacity: 0.6;">
+
+<footer style="background-color: #FFFEFF; color: #fff; padding: 40px 5%; text-align: center; font-family: sans-serif;">
+    <div class="footer-card" style="max-width: 600px; margin: 0 auto;">
+        
+        <h2 style="color: #FFD700; margin-bottom: 10px;">Santhi Jewellery</h2>
+        <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.9;">
+            67/2, Thirunallar Rd, Karaikal, Puducherry 609602
+        </p>
+
+        <!-- Social Links Arrangement -->
+        <div class="social-links" style="margin: 25px 0; display: flex; justify-content: center; gap: 20px;">
+            <a href="https://www.facebook.com/share/18SBm6zrLb/" style="color: #fff; font-size: 24px;"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://instagram.com/santhijewellerykaraikal" style="color: #fff; font-size: 24px;"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://youtube.com/@santhijewellerykaraikal?si=IJPqQRNroJWsZ_O7" style="color: #fff; font-size: 24px;"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+
+        <!-- Copyright Line -->
+        <p style="font-size: 0.85rem; border-top: 1px solid #444; padding-top: 20px; margin-top: 20px; opacity: 0.7;">
+            &copy; 2026 All Rights Reserved by Santhi Jewellery
+        </p>
+
+        <!-- Credit Line -->
+        <p style="font-size: 0.75rem; margin-top: 10px; opacity: 0.6;">
+            Powered by <a href="https://perfcut.github.io/Perfcut/" style="color: #FFD700; text-decoration: none;">@perf.cut</a>
+        </p>
+    </div>
+</footer>
+
+
+    <div id="modal" class="offer-modal">
+        <p style="margin-bottom: 20px; font-weight: 500;">Get notified about our latest Gold Rate and New Collections?</p>
+        <div style="display: flex; gap: 10px;">
+            <button onclick="offerResponse(true)" style="flex:1; background:var(--gold); border:none; color:white; padding:12px; border-radius:10px; cursor:pointer;">Yes</button>
+            <button onclick="offerResponse(false)" style="flex:1; background:#eee; border:none; padding:12px; border-radius:10px; cursor:pointer;">No</button>
+        </div>
+    </div>
+
+    <a href="https://wa.me/919500500546" class="whatsapp-float"><i class="fa-brands fa-whatsapp"></i></a>
+    <!-- Modal Background Overlay -->
+<div id="promoModal" style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100%; height:100%; background-color: rgba(0,0,0,0.6); align-items:center; justify-content:center;">
+    
+    <!-- Modal Content Box -->
+    <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: sans-serif;">
+        <h3 style="color: #5B1611; margin-top: 0;">Special Updates!</h3>
+        <p style="color: #333; line-height: 1.5;">We would like to send you awesome updates and offers!</p>
+        
+        <div style="margin-top: 25px; display: flex; gap: 10px; justify-content: center;">
+            <button onclick="allowUpdates()" style="background: #D4AF37; color: white; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold;">Allow</button>
+            <button onclick="closeModal()" style="background: #eee; color: #333; border: none; padding: 12px 25px; border-radius: 5px; cursor: pointer;">Don't allow</button>
+        </div>
+    </div>
+</div>
+
+
+    <script>
+  
+    // Show the modal after a 2-second delay when the page loads
+    window.onload = function() {
+        setTimeout(function() {
+            document.getElementById('promoModal').style.display = 'flex';
+        }, 2000);
+    };
+
+    // Close the modal
+    function closeModal() {
+        document.getElementById('promoModal').style.display = 'none';
+    }
+
+    // Redirect to WhatsApp with pre-filled message
+    function allowUpdates() {
+        const phoneNumber = "919500500546"; // International format without '+'
+        const message = "I am interested to know offers and updates";
+        const encodedMessage = encodeURIComponent(message);
+        
+        // Open WhatsApp link
+        window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        
+        closeModal(); // Close the modal after clicking
+    }
+
+
+    
+        // Menu Toggle
+        function toggleMenu() {
+            document.getElementById('sideNav').classList.toggle('open');
+            document.getElementById('overlay').style.display = 
+                document.getElementById('sideNav').classList.contains('open') ? 'block' : 'none';
+        }
+
+        // Slider logic
+        const slides = document.querySelectorAll('.slide');
+        let curSlide = 0;
+        const mobileImg = ['banner-mobile1.png', 'banner-mobile2.png', 'banner-mobile3.png'];
+        const desktopImg = ['banner-desktop1.png', 'banner-desktop2.png', 'banner-desktop3.png'];
+
+        function setHeroImages() {
+            const isMob = window.innerWidth <= 768;
+            slides.forEach((s, i) => {
+                s.style.backgroundImage = `url(${isMob ? mobileImg[i] : desktopImg[i]})`;
+            });
+        }
+        window.addEventListener('resize', setHeroImages);
+        setHeroImages();
+
+        setInterval(() => {
+            slides[curSlide].classList.remove('active');
+            curSlide = (curSlide + 1) % slides.length;
+            slides[curSlide].classList.add('active');
+        }, 5000);
+
+        // Scroll Logic (Bridal Nav + Desktop Parallax)
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            const bridal = document.getElementById('bridal');
+            const bTop = bridal.getBoundingClientRect().top;
+            const bBot = bridal.getBoundingClientRect().bottom;
+
+            // Nav color switch
+            if(bTop < 85 && bBot > 85) nav.classList.add('bridal-active');
+            else nav.classList.remove('bridal-active');
+
+            // Parallax (Desktop Only)
+            if(window.innerWidth > 768) {
+                document.querySelectorAll('.cinematic-block').forEach(block => {
+                    const rect = block.getBoundingClientRect();
+                    const img = block.querySelector('.parallax-img');
+                    if(rect.top < window.innerHeight && rect.bottom > 0) {
+                        img.style.transform = `translateY(${rect.top * 0.15}px)`;
+                        if(rect.top < window.innerHeight * 0.7) block.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        // Offer Modal
+        if (!localStorage.getItem("offerShown")) {
+            setTimeout(() => {
+                document.getElementById('modal').style.display = 'block';
+                localStorage.setItem("offerShown", "true");
+            }, 4000);
+        }
+        function offerResponse(allow) {
+            if(allow) window.location.href = "https://wa.me/919500500546?text=Subscribe%20Me";
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+          </html>
